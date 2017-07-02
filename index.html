@@ -34,7 +34,7 @@
 	var brickOffsetLeft = 30;
 	var score = 0;
 	var lives = 3;
-
+	var colorArray = ["#FF8C00","#FF00FF","#008000","#FFA500","#FF0000","#00FF7F","#FFFF00","#4682B4","#A0522D","#800080"]
 	var bricks = [];
 	for(c=0; c<brickColumnCount; c++) {
 	    bricks[c] = [];
@@ -112,7 +112,7 @@
 	                bricks[c][r].y = brickY;
 	                ctx.beginPath();
 	                ctx.rect(brickX, brickY, brickWidth, brickHeight);
-	                ctx.fillStyle = "#0095DD";
+	                ctx.fillStyle = colorArray[Math.floor(Math.random() * 10)];
 	                ctx.fill();
 	                ctx.closePath();
 	            }

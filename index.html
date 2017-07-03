@@ -71,18 +71,8 @@
 	document.addEventListener("mousemove", mouseMoveHandler, false);
 
 	function choose_difficulty(choice) {
-		if (dx<0) {
-			dx = -choice ;
-		}
-		else {
-			dx = choice;
-		}
-		if (dy<0) {
-			dy = -choice ;
-		}
-		else {
-			dy = choice;
-		}
+		dx = (dx/Math.abs(dx))*choice;
+		dy = (dy/Math.abs(dy))*choice;
 	}
 
 	function keyDownHandler(e) {
@@ -205,8 +195,8 @@
 	            else {
 	                x = canvas.width/2;
 	                y = canvas.height-30;
-	                // dx = 3;
-	                // dy = -3;
+	                dx = Math.abs(dx);
+	                dy = -Math.abs(dy);
 	                paddleX = (canvas.width-paddleWidth)/2;
 	            }
 	        }

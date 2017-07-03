@@ -4,14 +4,18 @@
     <meta charset="utf-8" />
     <title>Atari Breakout</title>
     <style>
-    	* { padding: 0; margin: 0; }
-    	canvas { background: #eee; display: block; margin: 0 auto; }
+    	p {
+		    margin-top: 225px;
+		    /*margin-bottom: 0px;*/
+		    /*margin-right: 150px;*/
+		    margin-left: 400px;
+		}
     </style>
 </head>
 <body>
-
+<p id="canvasedit">
 <canvas id="myCanvas" width="480" height="320"></canvas>
-
+</p>
 <script>	
 	var canvas = document.getElementById("myCanvas");
 	var ctx = canvas.getContext("2d");

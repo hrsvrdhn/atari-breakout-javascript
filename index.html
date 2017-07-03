@@ -4,18 +4,37 @@
     <meta charset="utf-8" />
     <title>Atari Breakout</title>
     <style>
-    	p {
-		    margin-top: 225px;
-		    /*margin-bottom: 0px;*/
-		    /*margin-right: 150px;*/
-		    margin-left: 400px;
+    	#heading
+    	{
+    		text-align: center;
+    		border : 3px solid black;
+    		font-family: Courier New;
+    		font-weight: bold;
+    		font-size: 30px;
+    	}
+    	#canvasedit {
+		    margin-top: 60px;
+		    margin-left: 430px;
+		}
+		#setmode {
+			text-align: center;
+			margin-top: 100px;
 		}
     </style>
 </head>
 <body>
+<div id="heading">
+	<h3>ATARI BREAKOUT</h3>
+</div>
 <p id="canvasedit">
-<canvas id="myCanvas" width="480" height="320"></canvas>
+	<canvas id="myCanvas" width="480" height="320"></canvas>
 </p>
+<div id="setmode">
+<button onclick="draw()">Start</button><br/>
+<button onclick="choose_difficulty(2)">Easy</button>
+<button onclick="choose_difficulty(4)">Medium</button>
+<button onclick="choose_difficulty(6)">Hard</button>
+</div>
 <script>	
 	var canvas = document.getElementById("myCanvas");
 	var ctx = canvas.getContext("2d");
@@ -50,6 +69,21 @@
 	document.addEventListener("keydown", keyDownHandler, false);
 	document.addEventListener("keyup", keyUpHandler, false);
 	document.addEventListener("mousemove", mouseMoveHandler, false);
+
+	function choose_difficulty(choice) {
+		if (dx<0) {
+			dx = -choice ;
+		}
+		else {
+			dx = choice;
+		}
+		if (dy<0) {
+			dy = -choice ;
+		}
+		else {
+			dy = choice;
+		}
+	}
 
 	function keyDownHandler(e) {
 	    if(e.keyCode == 39) {
@@ -171,8 +205,8 @@
 	            else {
 	                x = canvas.width/2;
 	                y = canvas.height-30;
-	                dx = 3;
-	                dy = -3;
+	                // dx = 3;
+	                // dy = -3;
 	                paddleX = (canvas.width-paddleWidth)/2;
 	            }
 	        }
@@ -190,7 +224,6 @@
 	    requestAnimationFrame(draw);
 	}
 
-	draw();
 </script>
 
 </body>

@@ -31,7 +31,7 @@
 </p>
 <div id="setmode">
 <button id="startbutton" onclick="draw()">Start</button><br/>
-<button id="easybutton" onclick="choose_difficulty('Easy')">Easy</button>
+<button id="easybutton" onclick="choose_difficulty('Easy')" disabled="true">Easy</button>
 <button id="mediumbutton" onclick="choose_difficulty('Medium')">Medium</button>
 <button id="hardbutton" onclick="choose_difficulty('Hard')">Hard</button>
 </div>
@@ -57,12 +57,12 @@
 	var brickOffsetLeft = 30;
 	var score = 0;
 	var lives = 3;
-	var colorArray = ["#FF8C00","#FF00FF","#008000","#FFA500","#FF0000","#00FF7F","#FFFF00","#4682B4","#A0522D","#800080"]
+	// var colorArray = ["#FF8C00","#FF00FF","#008000","#FFA500","#FF0000","#00FF7F","#FFFF00","#4682B4","#A0522D","#800080"]
 	var bricks = [];
 	for(c=0; c<brickColumnCount; c++) {
 	    bricks[c] = [];
 	    for(r=0; r<brickRowCount; r++) {
-	        bricks[c][r] = { x: 0, y: 0, status: 1 };
+	        bricks[c][r] = { x: 0, y: 0, status: 3 };
 	    }
 	}
 
@@ -119,11 +119,12 @@
 	    for(c=0; c<brickColumnCount; c++) {
 	        for(r=0; r<brickRowCount; r++) {
 	            var b = bricks[c][r];
-	            if(b.status == 1) {
+	            if(b.status > 0 ) {
 	                if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
 	                    dy = -dy;
-	                    b.status = 0;
-	                    score++;
+	                    b.status--;
+	                    if (b.status == 0)
+	                    	score++;
 	                    if(score == brickRowCount*brickColumnCount) {
 	                        alert("YOU WIN, CONGRATS!");
 	                        document.location.reload();
@@ -159,14 +160,19 @@
 	function drawBricks() {
 	    for(c=0; c<brickColumnCount; c++) {
 	        for(r=0; r<brickRowCount; r++) {
-	            if(bricks[c][r].status == 1) {
+	            if(bricks[c][r].status > 0) {
 	                var brickX = (r*(brickWidth+brickPadding))+brickOffsetLeft;
 	                var brickY = (c*(brickHeight+brickPadding))+brickOffsetTop;
 	                bricks[c][r].x = brickX;
 	                bricks[c][r].y = brickY;
 	                ctx.beginPath();
 	                ctx.rect(brickX, brickY, brickWidth, brickHeight);
-	                ctx.fillStyle = colorArray[Math.floor(Math.random() * 10)];
+	                if (bricks[c][r].status == 1)
+	                	ctx.fillStyle = "#FF0000";
+	                else if (bricks[c][r].status == 2)
+	                	ctx.fillStyle = "#FF4500";
+	                else
+	                	ctx.fillStyle = "#8B0000";
 	                ctx.fill();
 	                ctx.closePath();
 	            }

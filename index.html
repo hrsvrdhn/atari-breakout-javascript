@@ -30,10 +30,10 @@
 	<canvas id="myCanvas" width="640" height="480"></canvas>
 </p>
 <div id="setmode">
-<button onclick="draw()">Start</button><br/>
-<button onclick="choose_difficulty(2)">Easy</button>
-<button onclick="choose_difficulty(4)">Medium</button>
-<button onclick="choose_difficulty(6)">Hard</button>
+<button id="startbutton" onclick="draw()">Start</button><br/>
+<button id="easybutton" onclick="choose_difficulty('Easy')">Easy</button>
+<button id="mediumbutton" onclick="choose_difficulty('Medium')">Medium</button>
+<button id="hardbutton" onclick="choose_difficulty('Hard')">Hard</button>
 </div>
 <script>	
 	var canvas = document.getElementById("myCanvas");
@@ -71,6 +71,24 @@
 	document.addEventListener("mousemove", mouseMoveHandler, false);
 
 	function choose_difficulty(choice) {
+		if (choice == 'Easy') {
+			choice = 2;
+			document.getElementById("easybutton").disabled = true;
+			document.getElementById("mediumbutton").disabled = false;
+			document.getElementById("hardbutton").disabled = false;
+		}
+		else if (choice == 'Medium') {
+			choice = 4;
+			document.getElementById("easybutton").disabled = false;
+			document.getElementById("mediumbutton").disabled = true;
+			document.getElementById("hardbutton").disabled = false;			
+		}
+		else {
+			choice = 6;
+			document.getElementById("easybutton").disabled = false;
+			document.getElementById("mediumbutton").disabled = false;
+			document.getElementById("hardbutton").disabled = true;			
+		}
 		dx = (dx/Math.abs(dx))*choice;
 		dy = (dy/Math.abs(dy))*choice;
 	}
@@ -167,6 +185,7 @@
 	}
 
 	function draw() {
+		document.getElementById("startbutton").disabled = true;			
 	    ctx.clearRect(0, 0, canvas.width, canvas.height);
 	    drawBackground();
 	    drawBricks();

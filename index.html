@@ -8,17 +8,32 @@
     	{
     		text-align: center;
     		border : 3px solid black;
+    		border-radius: 5px;
     		font-family: Courier New;
     		font-weight: bold;
     		font-size: 20px;
     	}
-    	#canvasedit {
-		    margin-top: 10px;
-		    margin-left: 350px;
-		}
 		#setmode {
 			text-align: center;
+			margin-top: 10px;
+		}
+		.container {
 			margin-top: 20px;
+	    	height:100%;
+	    	width:100%;
+		}
+
+		.left-column {
+			text-align: center;
+		    float: left;
+		    border: 1px;
+		    width: 27%;
+		}
+
+		.right-column {
+		    float: left;
+		    width: 73%;
+		    display: block;
 		}
     </style>
 </head>
@@ -26,9 +41,20 @@
 <div id="heading">
 	<h3>ATARI BREAKOUT</h3>
 </div>
-<p id="canvasedit">
-	<canvas id="myCanvas" width="640" height="480"></canvas>
-</p>
+<div class="container">
+	<div class="left-column">
+		<h3><strong><u>Instructions</u></strong></h3>
+		<ul>
+			<li> Slide Mouse or press left arrow,right arrow to control the paddle.</li>
+			<li> Press P to pause the game , press P again to resume.</li>
+			<li> Each brick needs three hit to be completely destroyed.</li>
+			<li> Click on Easy,Medium,Hard button to set ball speed. </li>
+			<li> Click Start button to play.</li>
+	</div>
+	<div class="right-column">
+		<canvas id="myCanvas" width="640" height="480"></canvas>
+	</div>
+</div>
 <div id="setmode">
 <button id="startbutton" onclick="draw()">Start</button><br/>
 <button id="easybutton" onclick="choose_difficulty('Easy')" disabled="true">Easy</button>
@@ -196,7 +222,13 @@
 	    ctx.fillStyle = "#0095DD";
 	    ctx.fillText("Lives: "+lives, canvas.width-65, 20);
 	}
-
+	function pausecomp(millis)
+	{
+	    var date = new Date();
+	    var curDate = null;
+	    do { curDate = new Date(); }
+	    while(curDate-date < millis);
+	}
 	function draw() {
 		document.getElementById("startbutton").disabled = true;	
 		if (pause == false) {				
@@ -229,7 +261,8 @@
 		                y = canvas.height-30;
 		                dx = Math.abs(dx);
 		                dy = -Math.abs(dy);
-		                paddleX = (canvas.width-paddleWidth)/2;
+		                paddleX = (canvas.width-paddleWidth)/2;	
+		                pausecomp(500);
 		            }
 		        }
 		    }

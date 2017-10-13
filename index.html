@@ -3,63 +3,39 @@
 <head>
     <meta charset="utf-8" />
     <title>Atari Breakout</title>
-    <style>
-    	#heading
-    	{
-    		text-align: center;
-    		border : 3px solid black;
-    		border-radius: 5px;
-    		font-family: Courier New;
-    		font-weight: bold;
-    		font-size: 20px;
-    	}
-		#setmode {
-			text-align: center;
-			margin-top: 10px;
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<style type="text/css">
+		button {
+			margin:  10px;
 		}
-		.container {
-			margin-top: 20px;
-	    	height:100%;
-	    	width:100%;
-		}
-
-		.left-column {
-			text-align: center;
-		    float: left;
-		    border: 1px;
-		    width: 27%;
-		}
-
-		.right-column {
-		    float: left;
-		    width: 73%;
-		    display: block;
-		}
-    </style>
+	</style>
 </head>
 <body>
-<div id="heading">
-	<h3>ATARI BREAKOUT</h3>
-</div>
-<div class="container">
-	<div class="left-column">
-		<h3><strong><u>Instructions</u></strong></h3>
-		<ul>
-			<li> Slide Mouse or press left arrow,right arrow to control the paddle.</li>
-			<li> Press P to pause the game , press P again to resume.</li>
-			<li> Each brick needs three hit to be completely destroyed.</li>
-			<li> Click on Easy,Medium,Hard button to set ball speed. </li>
-			<li> Click Start button to play.</li>
+<div class="container ">
+	<div class="row" style="padding: 10px">
+		<div class="col-md-12 text-center alert alert-primary">
+			<h1>ATARI BREAKOUT</h1>			
+		</div>	
 	</div>
-	<div class="right-column">
-		<canvas id="myCanvas" width="640" height="480"></canvas>
+	<div class="row ">
+		<div class="col-md-4 text-center border border-primary " style="padding: 35px">
+			<h3><strong><u>Instructions</u></strong></h3>
+			<ul>
+				<li> Slide Mouse or press left arrow,right arrow to control the paddle.</li>
+				<li> Press P to pause the game , press P again to resume.</li>
+				<li> Each brick needs three hit to be completely destroyed.</li>
+				<li> Click on Easy,Medium,Hard button to set ball speed. </li>
+				<li> Click Start button to play.</li>
+			</ul>
+			<button id="startbutton" class="btn btn-success" onclick="draw()">Start</button><br/>
+			<button id="easybutton" class="btn btn-info"  onclick="choose_difficulty('Easy')" disabled="true">Easy</button>
+			<button id="mediumbutton" class="btn btn-warning"  onclick="choose_difficulty('Medium')">Medium</button>
+			<button id="hardbutton" class="btn btn-danger"  onclick="choose_difficulty('Hard')">Hard</button>
+		</div>
+		<div class="col-auto ">
+			<canvas id="myCanvas" width="640" height="480"></canvas>	
+		</div>
 	</div>
-</div>
-<div id="setmode">
-<button id="startbutton" onclick="draw()">Start</button><br/>
-<button id="easybutton" onclick="choose_difficulty('Easy')" disabled="true">Easy</button>
-<button id="mediumbutton" onclick="choose_difficulty('Medium')">Medium</button>
-<button id="hardbutton" onclick="choose_difficulty('Hard')">Hard</button>
 </div>
 <script>	
 	var canvas = document.getElementById("myCanvas");

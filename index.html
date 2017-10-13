@@ -18,7 +18,7 @@
 		</div>	
 	</div>
 	<div class="row ">
-		<div class="col-md-4 text-center border border-primary " style="padding: 35px">
+		<div class="col-sm-4 text-center border border-primary  mr-auto" style="padding: 35px">
 			<h3><strong><u>Instructions</u></strong></h3>
 			<ul>
 				<li> Slide Mouse or press left arrow,right arrow to control the paddle.</li>
@@ -32,10 +32,11 @@
 			<button id="mediumbutton" class="btn btn-warning"  onclick="choose_difficulty('Medium')">Medium</button>
 			<button id="hardbutton" class="btn btn-danger"  onclick="choose_difficulty('Hard')">Hard</button>
 		</div>
-		<div class="col-auto ">
+		<div class="col-sm-7 border border-primary">
 			<canvas id="myCanvas" width="640" height="480"></canvas>	
 		</div>
 	</div>
+	<hr>
 </div>
 <script>	
 	var canvas = document.getElementById("myCanvas");
@@ -119,7 +120,7 @@
 	    }
 	}
 	function mouseMoveHandler(e) {
-	    var relativeX = e.clientX - canvas.offsetLeft;
+	    var relativeX = e.clientX - canvas.offsetLeft - screen.width/2.32;
 	    if(relativeX > 0 && relativeX < canvas.width) {
 	        paddleX = relativeX - paddleWidth/2;
 	    }
@@ -147,7 +148,7 @@
 	function drawBackground() {
 	    ctx.beginPath();
 	    ctx.rect(0, 0, canvas.width, canvas.height);
-	    ctx.fillStyle = "#000000";
+	    ctx.fillStyle = "#FFFFFF";
 	    ctx.fill();
 	    ctx.closePath();
 	}
@@ -162,7 +163,7 @@
 	function drawPaddle() {
 	    ctx.beginPath();
 	    ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-	    ctx.fillStyle = "#0095DD";
+	    ctx.fillStyle = "#004085";
 	    ctx.fill();
 	    ctx.closePath();
 	}
@@ -175,13 +176,13 @@
 	                bricks[c][r].x = brickX;
 	                bricks[c][r].y = brickY;
 	                ctx.beginPath();
-	                ctx.rect(brickX, brickY, brickWidth, brickHeight);
+	                ctx.rect(brickX, brickY, brickWidth-5, brickHeight);
 	                if (bricks[c][r].status == 1)
 	                	ctx.fillStyle = "#FF0000";
 	                else if (bricks[c][r].status == 2)
-	                	ctx.fillStyle = "#FF4500";
+	                	ctx.fillStyle = "#b12b38";
 	                else
-	                	ctx.fillStyle = "#8B0000";
+	                	ctx.fillStyle = "#32373c";
 	                ctx.fill();
 	                ctx.closePath();
 	            }
